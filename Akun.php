@@ -106,6 +106,32 @@ include("Navbar.php")
                         <button type="submit" class="btn btn-primary mb-3">Cari</button>
                     </div>
                 </form>
+                <?php 
+
+                    $usernameSearch = '';
+                    $emailSearch = '';
+
+                    if (isset($_GET['cariUsername'])) {
+                        $usernameSearch = trim($_GET['cariUsername']);
+                    }
+
+                    if (isset($_GET['cariEmail'])) {
+                        $emailSearch = trim($_GET['cariEmail']);
+                    }
+
+                    if (!empty($usernameSearch) || !empty($emailSearch)) {
+                        echo 'Menampilkan data, ';
+                        if (!empty($usernameSearch)) {
+                            echo '<strong>username: </strong>' . $usernameSearch;
+                        }
+                        if (!empty($usernameSearch) && !empty($emailSearch)) {
+                            echo ' dan ';
+                        }
+                        if (!empty($emailSearch)) {
+                            echo '<strong>email: </strong>' . $emailSearch;
+                        }
+                    }
+                ?>
             </div>
         </div>
 

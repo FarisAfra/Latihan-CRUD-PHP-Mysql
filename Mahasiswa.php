@@ -130,6 +130,54 @@ include("Navbar.php")
                         <button type="submit" class="btn btn-primary mb-3">Cari</button>
                     </div>
                 </form>
+                <?php 
+
+                    $nimSearch = '';
+                    $namaSearch = '';
+                    $alamatSearch = '';
+                    $fakultasSearch = '';
+
+                    if (isset($_GET['cariNim'])) {
+                        $nimSearch = trim($_GET['cariNim']);
+                    }
+
+                    if (isset($_GET['cariNama'])) {
+                        $namaSearch = trim($_GET['cariNama']);
+                    }
+
+                    if (isset($_GET['cariAlamat'])) {
+                        $alamatSearch = trim($_GET['cariAlamat']);
+                    }
+
+                    if (isset($_GET['cariFakultas'])) {
+                        $fakultasSearch = trim($_GET['cariFakultas']);
+                    }
+
+                    if (!empty($nimSearch) || !empty($namaSearch) || !empty($alamatSearch) || !empty($fakultasSearch)) {
+                        echo 'Menampilkan data ';
+                        if (!empty($nimSearch)) {
+                            echo '<strong>, NIM: </strong>' . $nimSearch;
+                        }
+                        if (!empty($nimSearch) && (!empty($namaSearch) || !empty($alamatSearch) || !empty($fakultasSearch))) {
+                            echo ' dan ';
+                        }
+                        if (!empty($namaSearch)) {
+                            echo '<strong>, Nama: </strong>' . $namaSearch;
+                        }
+                        if (!empty($namaSearch) && (!empty($alamatSearch) || !empty($fakultasSearch))) {
+                            echo ' dan ';
+                        }
+                        if (!empty($alamatSearch)) {
+                            echo '<strong>, Alamat: </strong>' . $alamatSearch;
+                        }
+                        if (!empty($alamatSearch) && !empty($fakultasSearch)) {
+                            echo ' dan ';
+                        }
+                        if (!empty($fakultasSearch)) {
+                            echo '<strong>, Fakultas: </strong>' . $fakultasSearch;
+                        }
+                    }
+                ?>
             </div>
         </div>
 
