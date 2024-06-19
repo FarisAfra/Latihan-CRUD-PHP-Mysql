@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Jun 2024 pada 13.44
+-- Waktu pembuatan: 19 Jun 2024 pada 13.22
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -121,6 +121,29 @@ INSERT INTO `tblpresensi` (`Tanggal`, `NIP`, `Jam_Masuk`, `Jam_Pulang`) VALUES
 ('2024-06-10', 123, '16:30:00', '18:30:00'),
 ('2024-06-18', 456, '10:00:00', '12:00:00');
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tes`
+--
+
+CREATE TABLE `tes` (
+  `id` int(11) NOT NULL,
+  `tes` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tes`
+--
+
+INSERT INTO `tes` (`id`, `tes`) VALUES
+(1, 'SELECT pg.NIP, pg.Nama, COUNT(p.Tanggal) AS Jumlah_Presensi\nFROM TblPresensi p\nJOIN TblPegawai pg ON p.NIP = pg.NIP\nWHERE p.Tanggal BETWEEN \'2018-01-01\' AND \'2018-01-31\'\nGROUP BY pg.NIP, pg.Nama;\n'),
+(2, 'SELECT pg.NIP, pg.Nama, pg.Alamat, pg.Tanggal_lahir, pg.Kode_Divisi\r\nFROM TblPegawai pg\r\nWHERE MONTH(pg.Tanggal_lahir) = 11;\r\n'),
+(3, 'SELECT d.Nama_divisi, COUNT(pg.NIP) AS Jumlah_Pegawai\r\nFROM TblPegawai pg\r\nJOIN TblDivisi d ON pg.Kode_Divisi = d.Kode_divisi\r\nGROUP BY d.Nama_divisi;\r\n'),
+(4, 'SELECT pg.NIP, pg.Nama, pg.Alamat, pg.Tanggal_lahir, pg.Kode_Divisi\r\nFROM TblPegawai pg\r\nWHERE pg.Alamat LIKE \'%Bogor%\';\r\n'),
+(5, 'SELECT pg.NIP, pg.Nama, pg.Alamat, pg.Tanggal_lahir, pg.Kode_Divisi\r\nFROM TblPegawai pg\r\nLEFT JOIN TblPresensi p ON pg.NIP = p.NIP AND p.Tanggal BETWEEN \'2018-01-01\' AND \'2018-01-31\'\r\nWHERE p.NIP IS N'),
+(6, 'SELECT pg.NIP, pg.Nama, COALESCE(COUNT(p.Tanggal), 0) AS Jumlah_Presensi\r\nFROM TblPegawai pg\r\nLEFT JOIN TblPresensi p ON pg.NIP = p.NIP AND p.Tanggal BETWEEN \'2018-01-01\' AND \'2018-01-31\'\r\nGROUP BY pg');
+
 --
 -- Indexes for dumped tables
 --
@@ -158,6 +181,12 @@ ALTER TABLE `tblpresensi`
   ADD KEY `NIP` (`NIP`);
 
 --
+-- Indeks untuk tabel `tes`
+--
+ALTER TABLE `tes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -178,6 +207,12 @@ ALTER TABLE `biodata`
 --
 ALTER TABLE `tblpegawai`
   MODIFY `NIP` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=457;
+
+--
+-- AUTO_INCREMENT untuk tabel `tes`
+--
+ALTER TABLE `tes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
